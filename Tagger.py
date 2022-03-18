@@ -47,9 +47,9 @@ async def start(event):
                     ),
                     link_preview=False
                    )
-@client.on(events.NewMessage(pattern="^/bilgi$"))
+@client.on(events.NewMessage(pattern="^/help$"))
 async def help(event):
-  helptext = "**ᴇʀʀᴏʀ ᴛᴀɢɢᴇʀ bot'un Kömək Menyusu**\n\nƏmr: /utag \n  Bu əmri, başqalarına yanıtlamaq istedəyiniz mətinlə birlikdə işlədə bilərsiniz. /etag  \n stiker ilə etiketlə. \n`Nümunə: /utag Salam!`  \nBu əmri yanıt olaraq işlədə bilərsiniz. hər hansı bir mesaj Bot, yanıtlanan ilətiyə kullanıcıları etiketləyəcək."
+  helptext = "**ᴇʀʀᴏʀ ᴛᴀɢɢᴇʀ bot'un Kömək Menyusu**\n\nƏmr: /utag \n  Bu əmri, başqalarına yanıtlamaq istədiyiniz mətinlə birlikdə işlədə bilərsiniz. /etag  \n stiker ilə etiketlə. \n`Nümunə: /utag Salam!`  \nBu əmri yanıt olaraq işlədə bilərsiniz. hər hansı bir mesaj Bot, yanıtlanan ilətiyə kullanıcıları etiketləyəcək."
   await event.reply(helptext,
                     buttons=(
                       [
@@ -69,13 +69,13 @@ async def help(event):
 async def mentionall(event):
   global anlik_calisan
   if event.is_private:
-    return await event.respond("__Bu komut gruplarda ve kanallarda kullanılabilir.!__")
+    return await event.respond("__Bu əmr qruplarda ve kanallarda işlədilə bilər.!__")
   
   admins = []
   async for admin in client.iter_participants(event.chat_id, filter=ChannelParticipantsAdmins):
     admins.append(admin.id)
   if not event.sender_id in admins:
-    return await event.respond("__Yalnızca yöneticiler hepsinden bahsedebilir!__")
+    return await event.respond("__Yalnızca yöneticileri  bahsedebilir!__")
   
   if event.pattern_match.group(1):
     mode = "text_on_cmd"
@@ -88,7 +88,7 @@ async def mentionall(event):
   elif event.pattern_match.group(1) and event.reply_to_msg_id:
     return await event.respond("__Bana bir argüman ver!__")
   else:
-    return await event.respond("__Bir mesajı yanıtlayın veya başkalarından bahsetmem için bana bir metin verin!__")
+    return await event.respond("__Bir mesajı yanıtlayın və ya başqalarından bahsetmem üçün mənə bir mətin verin!__")
     
   if mode == "text_on_cmd":
     anlik_calisan.append(event.chat_id)
